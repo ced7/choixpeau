@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "choixpeau",
   "resources": {
-    "hash": "sha256-tj6+YW9sCnCclQ5hcgZX1WopnyLv59iczh61Vyp57H8=",
+    "hash": "sha256-1VhS7mIpZchNWuj0gSy+1oVyeX+bW7L1eynHMHFCKGk=",
     "jsModuleNative": {
       "dotnet.native.8.0.3.wzxwl5s97r.js": "sha256-D4sYBYmDfH/YekgYRgX959/2RG6k28sJSHmcsn+iikk="
     },
@@ -17,7 +17,7 @@
       "icudt_no_CJK.dat": "sha256-L7sV7NEYP37/Qr2FPCePo5cJqRgTXRwGHuwF5Q+0Nfs="
     },
     "assembly": {
-      "choixpeau.wasm": "sha256-YIIR69ieownkUuTzjshZF41f+vCG3oH27PNN33MH2f8=",
+      "choixpeau.wasm": "sha256-J/zT78xR8WpM+lqJ4unSWchEBGobVb4ZfZJs+83WDRA=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-310ljjsTeGpybs4fBRWbSTLL0nrNA71PlOeIptcsX/k=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-Y/ksmh7MaV1dZzUM66MGyvXQvhdunkhzuG+kPemHnNk=",
       "Microsoft.AspNetCore.Components.WebAssembly.wasm": "sha256-mwwNz/IMHU35BqhBaez63Z01g22S/iPHUXLcAMuyQL4=",
