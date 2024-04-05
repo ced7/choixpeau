@@ -1,0 +1,122 @@
+﻿@page "/"
+
+<PageTitle>choixpeau, par Erell</PageTitle>
+
+<h1>Choixpeau</h1>
+
+<figure>
+    <img src="Dessin_Ange.jpeg" alt="" style="width: auto; height: 200px;">
+</figure>
+
+<div class="grid">
+    <div>
+        <p>Vous êtes des premières années à l'école Poudlard. Vous entrez dans la grande salle. On met le choixpeau sur
+            votre tête. Indiquez votre nom ci-dessous, clickez, et le choixpeau vous dira dans quel maison vous êtes.
+        </p>
+        <input type="text" name="text" placeholder="Ton nom" aria-label="Text" @bind-value="@inputName"
+            @attributes="AdditionalAttributes" aria-describedby="invalid-helper" />
+        <small id="invalid-helper">@message_erreur</small>
+        <button @onclick="() => BtnClick()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" stroke-width="2" stroke="#000000" fill="none"
+                class="duration-300 transform transition-all" style="width: 64px; height: 64px;">
+                <path
+                    d="M41.71 10.58H28l-7.4 22.28a.1.1 0 00.09.13h8.49a.1.1 0 01.1.13l-6.57 19.64a.5.5 0 00.88.45L43.41 26a.1.1 0 00-.08-.16h-8.91a.11.11 0 01-.09-.15l7.47-15a.1.1 0 00-.09-.11z">
+                </path>
+            </svg>
+        </button>
+    </div>
+
+    <div>
+        <table>
+            <tbody>
+                @foreach (var i in dic)
+                {
+                    <tr>
+                        <th>@i.Key</th>
+                        <td class="@i.Value.Item2">@i.Value.Item1</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<dialog open="@showDialog">
+    <article>
+        <div class="grid">
+            <div aria-busy="true"></div>
+            <div>@dialogText</div>
+        </div>
+    </article>
+</dialog>
+
+@code {
+    private Random random = new();
+    private Dictionary<string, (string, string)> dic = new();
+    private string? inputName;
+    private bool? showDialog;
+    private string? message_erreur;
+    private Dictionary<string, object> AdditionalAttributes = new();
+    private string? dialogText;
+
+    private async Task BtnClick()
+    {
+        if (!string.IsNullOrWhiteSpace(inputName))
+        {
+            if (dic.Keys.Contains(inputName, StringComparer.InvariantCultureIgnoreCase))
+            {
+                message_erreur = "Cette personne a déjà une maison";
+                if (!AdditionalAttributes.ContainsKey("aria-invalid"))
+                {
+                    AdditionalAttributes.Add("aria-invalid", "true");
+                }
+                return;
+            }
+
+            message_erreur = "";
+            AdditionalAttributes.Clear();
+
+            showDialog = true;
+
+            await DisplayDialogText();
+
+            showDialog = false;
+
+            var maison = GetRandomMaison();
+
+            dic.Add(inputName, maison);
+
+            inputName = "";
+        }
+    }
+
+    private async Task DisplayDialogText()
+    {
+        dialogText = "Mmmmm";
+        await Task.Delay(1000);
+        dialogText = "Compliqué";
+        StateHasChanged();
+        await Task.Delay(1000);
+        dialogText = "Très compliqué";
+        StateHasChanged();
+        await Task.Delay(1000);
+        dialogText = "Je vois beaucoup de talent";
+        StateHasChanged();
+        await Task.Delay(2000);
+    }
+
+    private (string, string) GetRandomMaison()
+    {
+        int i = random.Next(1, 5);
+
+        return i switch
+        {
+            1 => ("Griffondor", "pico-background-red-500"),
+            2 => ("Poufsoufle", "pico-background-yellow-100"),
+            3 => ("Serpentard", "pico-background-green-500"),
+            4 => ("Serdaigle", "pico-background-blue-500"),
+            _ => ("", "pico-background-pink-300")
+        };
+    }
+}
