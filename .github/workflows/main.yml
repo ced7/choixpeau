@@ -27,6 +27,10 @@ jobs:
       with:
         html_path: bin/Release/net8.0/publish/wwwroot/index.html
         base_href: /choixpeau/
+    # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
+    - name: Add .nojekyll file
+      run: touch bin/Release/net8.0/publish/wwwroot/.nojekyll
+    #deploy branch to pages
     - name: Commit wwwroot to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
