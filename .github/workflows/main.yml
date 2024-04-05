@@ -22,6 +22,11 @@ jobs:
     # publishes Blazor project to the publish-folder
     - name: Publish .NET Project
       run: dotnet publish choixpeau.csproj -c Release
+    - name: Rewrite base href
+      uses: SteveSandersonMS/ghaction-rewrite-base-href@v1.1.0
+      with:
+        html_path: bin/Release/net8.0/publish/wwwroot/index.html
+        base_href: /choixpeau/
     - name: Commit wwwroot to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
