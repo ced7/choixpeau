@@ -18,22 +18,22 @@ jobs:
     # sets up .net sdk
     - uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '10.0.x'
     # publishes Blazor project to the publish-folder
     - name: Publish .NET Project
       run: dotnet publish choixpeau.csproj -c Release
     - name: Rewrite base href
       uses: SteveSandersonMS/ghaction-rewrite-base-href@v1.1.0
       with:
-        html_path: bin/Release/net8.0/publish/wwwroot/index.html
+        html_path: bin/Release/net10.0/publish/wwwroot/index.html
         base_href: /choixpeau/
     # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
     - name: Add .nojekyll file
-      run: touch bin/Release/net8.0/publish/wwwroot/.nojekyll
+      run: touch bin/Release/net10.0/publish/wwwroot/.nojekyll
     #deploy branch to pages
     - name: Commit wwwroot to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         branch: gh-pages
-        folder: bin/Release/net8.0/publish/wwwroot
+        folder: bin/Release/net10.0/publish/wwwroot
